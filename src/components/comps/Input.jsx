@@ -5,13 +5,19 @@ const { Input } = css;
 
 const InputComponent = (props) => {
 
-    const {placeholder} = props;
+    const { placeholder, action, inputValue } = props;
     
     return (
         <React.Fragment>
-            <Input type={'text'} 
+            <Input 
+            value={inputValue}
+            type={'text'} 
             placeholder={placeholder}
-            maxLength={'100'}
+            maxLength={'100'} 
+            onChange={event => {
+            const newValue = event.target.value
+            action(newValue)
+            }}
             />
         </React.Fragment>
     )
