@@ -5,7 +5,7 @@ const { DataContainer, ContentLine, ContentCell, ButtonsLine, ButtonItem } = css
 
 const DataList = (props) => {
 
-    const { data = [] } = props;
+    const { data = [], setShow } = props;
     const [ dataType, setDataType] = useState('расход');
 
     const filterData = data.filter(item => item.split('::')[1] === dataType)
@@ -16,7 +16,7 @@ const DataList = (props) => {
         return summ + +(item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
 
     }, 0)
-//не работает вычитание и сложение сумм
+
     const filterDataDelta = data.reduce((summ, item) => {
         if (item.split('::')[1] === 'доход') {
 
@@ -28,8 +28,14 @@ const DataList = (props) => {
     }, 0)
 
 
-    const reduceDataType1 = () => setDataType('доход');
-    const reduceDataType2 = () => setDataType('расход');
+    const reduceDataType1 = () => { 
+        setDataType('доход')
+        setShow(false) 
+    };
+    const reduceDataType2 = () => {
+        setDataType('расход')
+        setShow(true)
+    };
     const reduceDataType3 = () => setDataType('')
 
 
@@ -42,9 +48,9 @@ const DataList = (props) => {
     return (
         <React.Fragment>
             <ButtonsLine>
-                    <ButtonItem onClick={reduceDataType1}>Доходы</ButtonItem>
-                    <ButtonItem onClick={reduceDataType2}>Расходы</ButtonItem>
-                    <ButtonItem onClick={reduceDataType3}>Общее</ButtonItem>
+                    <ButtonItem style={{fontWeight: dataType === 'доход' ? 'bold' : '' }} onClick={reduceDataType1}>Доходы</ButtonItem>
+                    <ButtonItem style={{fontWeight: dataType === 'расход' ? 'bold' : '' }} onClick={reduceDataType2}>Расходы</ButtonItem>
+                    <ButtonItem style={{fontWeight: dataType === '' ? 'bold' : '' }} onClick={reduceDataType3}>Общее</ButtonItem>
                 </ButtonsLine>
             <DataContainer>
                 { filterData.length > 0 && <React.Fragment>

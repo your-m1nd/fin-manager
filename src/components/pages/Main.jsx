@@ -54,28 +54,30 @@ const Main = (props) => {
 
     return (
         <React.Fragment>
-            <FormContainer>
+            <FormContainer style={{ alignItems: 'flex-start'}}>
                 <InputComponent inputValue={value} action={setValue} placeholder={'Введите сумму транзакции'}/>
-            <FormControl>
+            <FormControl style={{ marginTop: '9px', marginBottom: '12px' }}>
             <FormLabel id="demo-controlled-radio-buttons-group">Выберите тип транзакции</FormLabel>    
             <RadioGroup
                 aria-labelledby="demo-controlled-radio-buttons-group"
                 name="controlled-radio-buttons-group"
                 value={type}
                 onChange={handleChange}
+                style={{ marginTop: '5px', marginLeft: '6px' }}
             >
                 <FormControlLabel value="расход" control={<Radio />} label="Расход" />
                 <FormControlLabel value="доход" control={<Radio />} label="Доход" />
             </RadioGroup>
             </FormControl>
             { type === 'доход' && <InputComponent inputValue={comment} action={setComment} placeholder={'Введите комментарий'}/>}
-            { type === 'расход' && <FormControl>
+            { type === 'расход' && <FormControl style={{ marginTop: '0px', marginBottom: '14px' }}> 
             <FormLabel id="demo-controlled-radio-buttons-group">Выберите тип расходов</FormLabel>    
             <RadioGroup
                 aria-labelledby="demo-controlled-radio-buttons-group"
                 name="controlled-radio-buttons-group"
                 value={comment}
                 onChange={handleChangeComment}
+                style={{ marginTop: '5px', marginLeft: '6px' }}
             >
                 <FormControlLabel value="покупка продуктов" control={<Radio />} label="Покупка продуктов" />
                 <FormControlLabel value="оплата счетов" control={<Radio />} label="Оплата счетов" />
